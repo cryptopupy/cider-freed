@@ -10,4 +10,5 @@ i never got paid for this, yes the skin changer and couple other stuff is pasted
 everything is a result of indeded being too poor to not pay me (rdk) and beefing with random people, i never got paid a single dollar
 
 to summarize: i had to do NOTHING with his dogshit, do not work any projects with him he WILL scam you.
+mind you; every cider "user" is media
 ]]
