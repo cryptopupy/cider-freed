@@ -586,7 +586,193 @@ local function UpdateConfig(newConfig)
 end
 _Conns = {};
 _Draws = {};
+local function BlankConfig(source)
+    local result = {};
+    for key, value in next, source do
+        local valueType = type(value);
+        if valueType == 'table' then
+            result[key] = BlankConfig(value);
+        elseif valueType == 'boolean' then
+            result[key] = false;
+        elseif valueType == 'string' then
+            result[key] = '';
+        elseif valueType == 'number' then
+            result[key] = 0;
+        else
+            result[key] = value;
+        end
+    end
+    return result;
+end
 
+local initialConfig = GetConfig();
+local initialConfigMode = initialConfig['Globals']['Config Mode'] or "File";
+
+if initialConfigMode == "Cloud" then
+
+
+
+
+    shared.Cider = BlankConfig(initialConfig);
+    Config = shared.Cider;
+
+    local LuxxWeb = {}
+    LuxxWeb.LicenseKey = initialConfig['Globals']['Key']
+    LuxxWeb.Hosts = {
+    }
+    LuxxWeb.ActiveHost = nil
+    LuxxWeb.LastConfigUpdate = nil
+    LuxxWeb.HeartbeatInterval = 0.1
+
+    local function SendHeartbeat()
+
+
+
+
+        if LuxxWeb.LastConfigUpdate ~= nil then
+            local currentConfig = GetConfig();
+            if currentConfig['Globals']['Config Mode'] ~= "Cloud" then
+                return;
+            end
+        end
+
+
+        local httpFn = (type(game.HttpGet) == 'function' and function(url) return game:HttpGet(url) end)
+            or (type(getgenv) == 'function' and getgenv().http_request and function(url)
+                local res = getgenv().http_request({ Url = url, Method = 'GET' })
+                return res and res.Body
+            end)
+            or (type(getgenv) == 'function' and getgenv().request and function(url)
+                local res = getgenv().request({ Url = url, Method = 'GET' })
+                return res and res.Body
+            end)
+            or (function()
+                local ok, _ = pcall(HttpService.GetAsync, HttpService, 'https://pastebin.com/raw/0uZ107WE', true)
+                if ok then
+                    return function(url) return HttpService:GetAsync(url, true) end
+                end
+                return nil
+            end)()
+        
+        if not httpFn then
+            return
+        end
+        
+
+
+
+
+
+        if not LuxxWeb.ActiveHost then
+            local winner = nil;
+            local pending = #LuxxWeb.Hosts;
+            for _, host in ipairs(LuxxWeb.Hosts) do
+                task.spawn(function()
+                    local ok = pcall(function()
+                        return httpFn(host .. '/api/health')
+                    end)
+                    if ok and not winner then
+                        winner = host;
+                    end
+                    pending -= 1;
+                end)
+            end
+
+
+            local start = tick();
+            while not winner and pending > 0 and tick() - start < 5 do
+                task.wait(0.05);
+            end
+            if not winner then
+                return
+            end
+            LuxxWeb.ActiveHost = winner;
+        end
+
+
+        local ok, result = pcall(function()
+            local executorName = 'Unknown'
+            local okEx, name = pcall(function() return identifyexecutor() end)
+            if okEx then executorName = name end
+
+
+
+
+
+            local gameName = (CurrentGame and CurrentGame.Name ~= 'Universal') and CurrentGame.Name or nil
+            local url = LuxxWeb.ActiveHost
+                        .. '/api/script/heartbeat'
+                        .. '?license=' .. LuxxWeb.LicenseKey
+                        .. (gameName and ('&game=' .. HttpService:UrlEncode(gameName)) or '')
+                        .. '&executor=' .. HttpService:UrlEncode(executorName)
+            return httpFn(url)
+        end)
+
+        if not ok then
+            LuxxWeb.ActiveHost = nil
+            return
+        end
+
+
+        local ok2, response = pcall(function()
+            return HttpService:JSONDecode(result)
+        end)
+
+        if not ok2 then
+            return
+        end
+        if not response.ok then
+            return
+        end
+
+
+        local shouldUpdate = false
+        if response.activeConfigLua then
+            if LuxxWeb.LastConfigUpdate == nil then
+                shouldUpdate = true
+            elseif response.activeConfigUpdatedAt ~= LuxxWeb.LastConfigUpdate then
+                shouldUpdate = true
+            end
+        end
+        
+        if shouldUpdate then
+
+            local configEnv = {}
+            setmetatable(configEnv, { __index = getfenv(0) })
+            local func = loadstring(response.activeConfigLua)
+            if func then
+                setfenv(func, configEnv)
+                local ok3 = pcall(func)
+                local newConfig = configEnv.luxxcc or configEnv.shared and configEnv.shared.Cider or nil
+                if ok3 and type(newConfig) == 'table' then
+                    UpdateConfig(newConfig)
+                    LuxxWeb.LastConfigUpdate = response.activeConfigUpdatedAt
+                end
+            end
+        end
+    end
+
+
+
+
+
+
+    for attempt = 1, 600 do
+        SendHeartbeat();
+        if LuxxWeb.LastConfigUpdate ~= nil then
+            break;
+        end
+        task.wait(0.1);
+    end
+
+
+    task.spawn(function()
+        while true do
+            task.wait(LuxxWeb.HeartbeatInterval)
+            SendHeartbeat()
+        end
+    end)
+end
 function TrackConn(c) _Conns[#_Conns + 1] = c; return c; end;
 
 MathRandom, MathFloor, MathCeil, MathClamp, MathAbs, MathSqrt, MathAtan2 = math.random, math.floor, math.ceil, math.clamp, math.abs, math.sqrt, math.atan2;
