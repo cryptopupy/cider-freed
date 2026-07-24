@@ -11,4 +11,6 @@ everything is a result of indeded being too poor to not pay me (rdk) and beefing
 
 to summarize: i had to do NOTHING with his dogshit, do not work any projects with him he WILL scam you.
 mind you; every cider "user" is media
+
+for more info, join https://discord.gg/cZFec8fmtJ
 ]]
