@@ -1,4 +1,7 @@
 --[[ 
+originally, i gave him a modified version off "luxx.cc", my old project that never made it out which i worked with "zynospike". i only did small parts of luxx though and when i "worked" on cider
+i just pasted the old zynospikes source, i dont know what the fuck zyno did to his src i just did what i was told to do, expecting a small pay.
+
 rolled cant code shit, indeded cant code shit, "xaii" is a alt of either indeded or rolled.
 i had to do nothing with the ai dogshit inside this scirpt indeded used claude for this dogshit
 proof:
@@ -15,6 +18,9 @@ i only worked on weapon mods or other random shit the rest is indeded
 
 
 for more info, join https://discord.gg/cZFec8fmtJ
+
+he also resorted to posting a fake face of me??😭 speaks for itself hes desprate to save his ruined rep he gets punched by ncrs all day on his tiktok
+
 
 note: i dont care if you paste off this aslong as you dont sell this its hot doghit
 if you are pasting, star this repo and credit this repo
