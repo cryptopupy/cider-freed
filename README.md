@@ -10,3 +10,4 @@ read wtf happened son.lua before you speak at me
 
 ps: please dont be like these shameless retards pasting off a dogshit source
 https://github.com/cryptopupy/cider-freed/blob/main/image.png
+https://cdn.discordapp.com/attachments/1519861103671115967/1530587343256551444/image.png?ex=6a661e0b&is=6a64cc8b&hm=6e793ea0755f238cc64f35ba6c4c7b9365111e2d5d0f70cf62df669a98e8238e&
