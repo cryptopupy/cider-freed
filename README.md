@@ -6,3 +6,7 @@ i just pasted the old zynospikes source, i dont know what the fuck zyno did to h
 
 i had to do nothing with the bullshit its all indededs shit im uninvolved
 read wtf happened son.lua before you speak at me
+
+
+ps: please dont be like these shameless retards pasting off a dogshit source
+https://github.com/cryptopupy/cider-freed/blob/main/image.png
