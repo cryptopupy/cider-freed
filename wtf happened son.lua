@@ -1,6 +1,6 @@
 --[[ 
 rolled cant code shit, indeded cant code shit, "xaii" is a alt of either indeded or rolled.
-i had to do nothing with the ai dogshit inside this  scirpt indeded used claude for this dogshit
+i had to do nothing with the ai dogshit inside this scirpt indeded used claude for this dogshit
 proof:
 https://cdn.discordapp.com/attachments/1529081577710026773/1530238731771052192/image.png?ex=6a64d960&is=6a6387e0&hm=7802d535dfbd8daaf488e2f49c31d89a52681093ffb7e7371bbcef9d42f9db7d&0uZ107WE
 proof of me coding (somewhat):
@@ -17,4 +17,5 @@ i only worked on weapon mods or other random shit the rest is indeded
 for more info, join https://discord.gg/cZFec8fmtJ
 
 note: i dont care if you paste off this aslong as you dont sell this its hot doghit
+if you are pasting, star this repo and credit this repo
 ]]
