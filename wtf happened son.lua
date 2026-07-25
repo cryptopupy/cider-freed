@@ -15,4 +15,6 @@ i only worked on weapon mods or other random shit the rest is indeded
 
 
 for more info, join https://discord.gg/cZFec8fmtJ
+
+note: i dont care if you paste off this aslong as you dont sell this its hot doghit
 ]]
